@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Football Team Management Application</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+
+
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>List of team members</h1>
+        </div>
+
+        <div class="row">
+            <div class = "col-lg-3">
+                <a th:href = "@{/teamMembers/new}" class="btn btn-primary btn-sm mb-3"> Add Team Member</a>
+            </div>
+        </div>
+
+        <div class="row" method="get" action="/teamMembers/export/pdf">
+            <div class = "col-lg-3">
+                <button type="submit" class="btn btn-primary">Export PDF</button>
+            </div>
+        </div>
+
+        <div class="="row>
+            <div class = "col-lg-3">
+                <a th:href = "@{/teamMembers/redCards}" class="btn btn-primary btn-sm mb-3"> Top Red Cards</a>
+            </div>
+        </div>
+
+        <table class ="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nume</th>
+                    <th>Prenume</th>
+                    <th>Varsta</th>
+                    <th>Nationalitate</th>
+                    <th>Pozitie</th>
+                    <th>Goluri</th>
+                    <th>Pase decisive</th>
+                    <th>Minute jucate</th>
+                    <th>Cartonase galbene</th>
+                    <th>Cartonase rosi</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each = "teamMember: ${teamMembers}">
+                    <td th:text = "${teamMember.name}"></td>
+                    <td th:text = "${teamMember.surname}"></td>
+                    <td th:text = "${teamMember.varsta}"></td>
+                    <td th:text = "${teamMember.nationalitate}"></td>
+                    <td th:text = "${teamMember.pozitie}"></td>
+                    <td th:text = "${teamMember.goluri}"></td>
+                    <td th:text = "${teamMember.paseDecisive}"></td>
+                    <td th:text = "${teamMember.minuteJucate}"></td>
+                    <td th:text = "${teamMember.cartonaseGalbene}"></td>
+                    <td th:text = "${teamMember.cartonaseRosi}"></td>
+                    <td>
+                        <a th:href = "@{/teamMembers/edit/{id}(id=${teamMember.id})}" class="btn btn-primary">Update</a>
+                    </td>
+                    <td>
+                        <a th:href = "@{/teamMembers/{id}(id=${teamMember.id})}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table >
+
+    </div>
+</body>
+</html>
